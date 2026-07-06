@@ -1,0 +1,132 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1e1e24; /* Sleek dark mode background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    text-align: center;
+    max-width: 450px;
+}
+
+h1 {
+    color: #333;
+    margin-top: 0;
+    font-size: 24px;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* --- THE SUDOKU GRID --- */
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(9, 45px);
+    grid-template-rows: repeat(9, 45px);
+    border: 3px solid #000000; /* Bold outer frame */
+    background: #ccc; /* Subtle line color for normal cell dividers */
+    gap: 1px;
+    margin: 25px auto;
+    width: max-content;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Base style for every cell */
+.cell {
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    background: #ffffff;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.15s ease;
+}
+
+.cell:focus {
+    background: #e3f2fd; /* Light blue highlight on active box */
+}
+
+/* --- THE 3x3 BLOCK SEPARATORS --- */
+
+/* Vertical thick lines: Right border on columns 3 and 6 */
+.cell:nth-child(9n+3), 
+.cell:nth-child(9n+6) {
+    border-right: 3px solid #000000;
+}
+
+/* Horizontal thick lines: Bottom border on rows 3 and 6 */
+#grid-container > input:nth-child(n+19):nth-child(-n+27),
+#grid-container > input:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 3px solid #000000;
+}
+
+/* AI solved numbers presentation */
+.ai-solved {
+    color: #2e7d32 !important;
+    background: #e8f5e9 !important;
+    animation: popIn 0.3s ease-out;
+}
+
+/* --- CONTROLS & BUTTONS --- */
+.controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background: #2563eb;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover { 
+    background: #1d4ed8; 
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.clear-btn { 
+    background: #4b5563; 
+}
+.clear-btn:hover { 
+    background: #374151; 
+}
+
+/* Mini Preset Buttons Styling */
+.presets button {
+    margin: 0 4px;
+    padding: 8px 14px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+/* Quick entry animation for AI solution */
+@keyframes popIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
